@@ -28,7 +28,7 @@ jobs:
           APP_NAME=$(grep 'name:' Chart.yaml | awk '{print $2}' | tr -d '"')
           echo "APP_NAME=$APP_NAME" >> $GITHUB_OUTPUT
 
-      - name: Build image
+      - name: Build New Image
         run: |
           docker build -t harbor.phink8s.com/library/${{ steps.app_name.outputs.APP_NAME }}:${{ steps.version.outputs.VERSION }} .
 
@@ -38,6 +38,6 @@ jobs:
             -u ${{ secrets.HARBOR_USERNAME }} \
             --password-stdin
 
-      - name: Push image
+      - name: Push New Image
         run: |
           docker push harbor.phink8s.com/library/${{ steps.app_name.outputs.APP_NAME }}:${{ steps.version.outputs.VERSION }}
