@@ -1,0 +1,17 @@
+replicaCount: 1
+
+image:
+  repository: harbor.phink8s.com/library/ip-check
+  pullPolicy: Always
+  # Tag is set from Chart.yaml appVersion
+
+namespace: web-app
+
+service:
+  service: ip-check-svc
+  port: 80
+
+ingress:
+  enabled: true
+  host: ipcheck.phink8s.com
+  secretName: wildcard-phink8s.com-tls
