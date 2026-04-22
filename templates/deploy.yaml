@@ -5,8 +5,13 @@ metadata:
   namespace: {{ .Values.namespace }}
   labels:
     app: {{ .Chart.Name }}
-    chart: {{ .Chart.Name }}-{{ .Chart.Version }}
+    app.kubernetes.io/name: {{ .Chart.Name }}
+    app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
     release: {{ .Release.Name }}
+    version: {{ .Chart.AppVersion | quote }}
+  annotations:
+    app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
